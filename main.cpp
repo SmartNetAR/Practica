@@ -38,9 +38,13 @@ char *passwd = "1234";
 int main(int argc, char** argv) {
     int i;
     //printf("<!DOCTYPE html>\n");
-	printf("Content-Type: text/json\n\n");
-	//printf("Content-Type: text/html; charset=utf-8\n\n");
+	//printf("Content-Type: text/json\n\n");
+	printf("Content-Type: text/html; charset=utf-8\n\n");
 	printf("<html>\n");
+	printf("<head>\n");
+	printf("<title>Conectando Postgress con cgi c++</title>\n");
+	printf("</head> \n");
+	
 	printf("<body>\n");
     cnn = PQsetdbLogin(host,port,NULL,NULL,dataBase,user,passwd);
     if (PQstatus(cnn) != CONNECTION_BAD) {
@@ -50,22 +54,22 @@ int main(int argc, char** argv) {
         if (result != NULL) {
             int tuplas = PQntuples(result);
             int campos = PQnfields(result);
-            cout << "No. Filas:" << tuplas << endl;
-            cout << "No. Campos:" << campos << endl;
+            cout << "No. Filas:" << tuplas << "<br>" << endl ;
+            cout << "No. Campos:" << campos << "<br>" << endl ;
 
-            cout << "Los nombres de los campos son:" << endl;
+            cout << "Los nombres de los campos son:" << "<br>" << endl ;
 
             for (i=0; i<campos; i++) {
                 cout << PQfname(result,i) << " | ";
             }
 
-            cout << endl << "Contenido de la tabla" << endl;
+            cout << endl << "Contenido de la tabla" << "<br>" << endl ;
 
             for (i=0; i<tuplas; i++) {
                 for (int j=0; j<campos; j++) {
                     cout << PQgetvalue(result,i,j) << " | ";
                 }
-                cout << endl;
+                cout << "<br>" << endl ;
             }
         }
 
