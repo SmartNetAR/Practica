@@ -13,6 +13,7 @@
 #include <libpq-fe.h>
 
 class pqConnect {
+private:
     char* host ;
     char* dataBase ;
     char* port ;
@@ -23,6 +24,7 @@ class pqConnect {
     
 public:
     pqConnect () ;
+    pqConnect ( char* host, char* port, char* dataBase, char* user, char* passwd ) ;
     bool Connect() ;
     void Disconnect() ;
     int Show() ;
