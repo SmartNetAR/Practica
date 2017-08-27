@@ -8,40 +8,49 @@
 
 #include "pqConnect.hpp"
 
-
 pqConnect::pqConnect() {
     PGconn *cnn = NULL;
     PGresult *result = NULL;
 }
 
-bool pqConnect::Connect() {
+pqConnect::pqConnect ( char* Host, char* Port, char* DataBase, char* User, char* Passwd ) {
+    PGconn *cnn = NULL;
+    PGresult *result = NULL;
+    host = Host ;
+    dataBase = DataBase ;
+    port = Port ;
+    user = User ;
+    passwd = Passwd ;
+}
+
+int pqConnect::Show() {
 
     int i;
     
     cnn = PQsetdbLogin(host,port,NULL,NULL,dataBase,user,passwd);
     if (PQstatus(cnn) != CONNECTION_BAD) {
-        cout << "Estamos conectados a PostgreSQL!" << endl;
+        printf( "Estamos conectados a PostgreSQL!<br>\n" ) ; 
         result = PQexec(cnn, "SELECT * FROM users");//result = PQexec(cnn, "SELECT * FROM test");
         
         if (result != NULL) {
             int tuplas = PQntuples(result);
             int campos = PQnfields(result);
-            cout << "No. Filas:" << tuplas << "<br>" << endl ;
-            cout << "No. Campos:" << campos << "<br>" << endl ;
+            printf( "No. Filas: %i<br>\n", tuplas ) ;
+            printf( "No. Campos:%i<br>\n", campos ) ;
             
-            cout << "Los nombres de los campos son:" << "<br>" << endl ;
+            printf( "Los nombres de los campos son:<br>\n" ) ;
             
             for (i=0; i<campos; i++) {
-                cout << PQfname(result,i) << " | ";
+                printf( "%s | ", PQfname(result,i) ) ;
             }
             
-            cout << endl << "Contenido de la tabla" << "<br>" << endl ;
+            printf( "Contenido de la tabla<br>\n" ) ;
             
             for (i=0; i<tuplas; i++) {
                 for (int j=0; j<campos; j++) {
-                    cout << PQgetvalue(result,i,j) << " | ";
+                    printf( "%s | ",PQgetvalue(result,i,j) );
                 }
-                cout << "<br>" << endl ;
+                printf ( "<br>\n" ) ;
             }
         }
         return true ;
@@ -49,12 +58,11 @@ bool pqConnect::Connect() {
         //PQclear(result);
         
     } else {
-        cout << "Error de conexion" << endl;
+        printf( "Error de conexion\n" );
         PQfinish(cnn);
         return false ;
     }
-    
-    //PQfinish(cnn);
+
 }
 
 void pqConnect::Disconnect() {
@@ -62,6 +70,3 @@ void pqConnect::Disconnect() {
     PQfinish(cnn);
 }
 
-int pqConnect::Show() {
-    
-}
