@@ -2,7 +2,35 @@ using namespace std ;
 #include <iostream>
 #include <libpq-fe.h>
 
-/* la tabla probada es la siguiente:
+void InfoPostgreSQL(char *host, char *port, char *dataBase, char *user, char *passwd) ;
+/* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+int main(int argc, char** argv) {
+    //printf("<!DOCTYPE html>\n");
+	//printf("Content-Type: text/json\n\n");
+	printf("Content-Type: text/html; charset=utf-8\n\n");
+	printf("<html>\n");
+	printf("<head>\n");
+	printf("<title>Conectando Postgress con cgi c++</title>\n");
+	printf("</head> \n");
+	InfoPostgreSQL("localhost", "5432", "apaaa","postgres", "1234") ;
+	printf("<body>\n");
+    printf("</body>\n");
+    printf("</html>\n");
+	return 0;
+}
+
+void InfoPostgreSQL(char *host, char *port, char *dataBase, char *user, char *passwd) {
+/*
+PGconn *cnn = NULL;
+PGresult *result = NULL;
+char *host = "localhost";
+char *port = "5432";
+char *dataBase = "apaaa";//char *dataBase = "postgres";
+char *user = "postgres";
+char *passwd = "1234";
+
+la tabla probada es la siguiente:
 CREATE TABLE public.users
 (
 id numeric NOT NULL,
@@ -24,28 +52,10 @@ INSERT INTO users (id, name, admin) values(1,'leo',true);
 INSERT INTO users (id, name, admin) values(2,'caro',true);
 INSERT INTO users (id, name, admin) values(3,'nano',false);
 */
+	int i;
+	PGconn *cnn = NULL;
+	PGresult *result = NULL;
 
-PGconn *cnn = NULL;
-PGresult *result = NULL;
-
-char *host = "localhost";
-char *port = "5432";
-char *dataBase = "apaaa";//char *dataBase = "postgres";
-char *user = "postgres";
-char *passwd = "1234";
-/* run this program using the console pauser or add your own getch, system("pause") or input loop */
-
-int main(int argc, char** argv) {
-    int i;
-    //printf("<!DOCTYPE html>\n");
-	//printf("Content-Type: text/json\n\n");
-	printf("Content-Type: text/html; charset=utf-8\n\n");
-	printf("<html>\n");
-	printf("<head>\n");
-	printf("<title>Conectando Postgress con cgi c++</title>\n");
-	printf("</head> \n");
-	
-	printf("<body>\n");
     cnn = PQsetdbLogin(host,port,NULL,NULL,dataBase,user,passwd);
     if (PQstatus(cnn) != CONNECTION_BAD) {
         cout << "Estamos conectados a PostgreSQL!" << endl;
@@ -78,11 +88,9 @@ int main(int argc, char** argv) {
 
     } else {
         cout << "Error de conexion" << endl;
-        return 0;
+        //return 0;
     }
 
     PQfinish(cnn);
-    printf("</body>\n");
-    printf("</html>\n");
-	return 0;
+
 }
