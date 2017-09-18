@@ -27,6 +27,6 @@ public:
     pqConnect ( char* host, char* port, char* dataBase, char* user, char* passwd ) ;
     bool Connect() ;
     void Disconnect() ;
-    int Show() ;
+    int Show( char* table ) ;
 };
 #endif /* pqConnect_hpp */
