@@ -23,14 +23,27 @@ pqConnect::pqConnect ( char* Host, char* Port, char* DataBase, char* User, char*
     passwd = Passwd ;
 }
 
-int pqConnect::Show() {
+int pqConnect::Show( char* table ) {
 
-    int i;
+    int i = 0 ;
+    char cSQL[] = "SELECT * FROM " ;
+    
+    int length = 14 ;
+    while (table[i] != '\0' ){
+        cSQL[length] = table[i];
+        length ++;
+        i++;
+    }
+    cSQL[length] = '\0';
+    
+    printf( "%s<br>\n", cSQL ) ;
+    
     
     cnn = PQsetdbLogin(host,port,NULL,NULL,dataBase,user,passwd);
     if (PQstatus(cnn) != CONNECTION_BAD) {
         printf( "Estamos conectados a PostgreSQL!<br>\n" ) ; 
-        result = PQexec(cnn, "SELECT * FROM users");//result = PQexec(cnn, "SELECT * FROM test");
+        
+        result = PQexec(cnn, cSQL);
         
         if (result != NULL) {
             int tuplas = PQntuples(result);
@@ -69,4 +82,3 @@ void pqConnect::Disconnect() {
     PQclear(result);
     PQfinish(cnn);
 }
-
