@@ -23,6 +23,21 @@ pqConnect::pqConnect ( char* Host, char* Port, char* DataBase, char* User, char*
     passwd = Passwd ;
 }
 
+bool pqConnect::Connect() {
+	cnn = PQsetdbLogin(host,port,NULL,NULL,dataBase,user,passwd);
+    if (PQstatus(cnn) != CONNECTION_BAD) {
+        printf( "Estamos conectados a PostgreSQL!<br>\n" ) ; 
+        connected = true ;
+        result = PQexec(cnn, "");
+	} else {
+		printf( "Error de conexion!<br>\n" ) ;
+		PQfinish(cnn) ;
+		connected = false ;
+	}
+	return connected ;
+
+}
+
 int pqConnect::Show( char* table ) {
 
     int i = 0 ;
@@ -39,9 +54,7 @@ int pqConnect::Show( char* table ) {
     printf( "%s<br>\n", cSQL ) ;
     
     
-    cnn = PQsetdbLogin(host,port,NULL,NULL,dataBase,user,passwd);
-    if (PQstatus(cnn) != CONNECTION_BAD) {
-        printf( "Estamos conectados a PostgreSQL!<br>\n" ) ; 
+    if (connected ) {
         
         result = PQexec(cnn, cSQL);
         
@@ -72,13 +85,14 @@ int pqConnect::Show( char* table ) {
         
     } else {
         printf( "Error de conexion\n" );
-        PQfinish(cnn);
         return false ;
     }
 
 }
 
 void pqConnect::Disconnect() {
-    PQclear(result);
-    PQfinish(cnn);
+	if (connected ) {
+    	PQclear(result);
+    	PQfinish(cnn);
+	}
 }

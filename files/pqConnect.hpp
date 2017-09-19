@@ -21,6 +21,7 @@ private:
     char* passwd ;
     PGconn *cnn ;
     PGresult *result ;
+    bool connected ;
     
 public:
     pqConnect () ;

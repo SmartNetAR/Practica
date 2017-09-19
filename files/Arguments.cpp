@@ -5,8 +5,8 @@ Arguments::Arguments(char* strValue )
 {
 	str = strValue ;
 	for ( int i = 0; i < MAX_LEN; i++ ) {
-		values.method[i] = '\0' ;
-		values.value[i] = '\0' ;
+		values.method[i] = 0 ;
+		values.value[i] = 0 ;
 	}
 	Parce() ;
 }
