@@ -14,12 +14,12 @@ CppCompiler=
 Linker=libpq.dll_@@_
 IsCpp=1
 Icon=
-ExeOutput=
+ExeOutput=..\..\..\..\xampp\cgi-bin
 ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
-OverrideOutput=0
-OverrideOutputName=testPQ.exe
+OverrideOutput=1
+OverrideOutputName=index.cgi
 HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
@@ -29,7 +29,7 @@ IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=0000000000000000001000000
-UnitCount=3
+UnitCount=5
 
 [VersionInfo]
 Major=1
@@ -72,6 +72,26 @@ BuildCmd=
 
 [Unit3]
 FileName=pqConnect.hpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit4]
+FileName=Arguments.hpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit5]
+FileName=Arguments.cpp
 CompileCpp=1
 Folder=
 Compile=1
