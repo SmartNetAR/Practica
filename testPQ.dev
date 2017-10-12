@@ -5,16 +5,16 @@ Type=1
 Ver=2
 ObjFiles=
 Includes="C:\Program Files\PostgreSQL\9.6\include"
-Libs="C:\Program Files\PostgreSQL\9.6\lib";"D:\Dropbox\Privado\ISFT151 Sistemas\Práctica Profesional\Code\postgres y cgi"
+Libs="C:\Program Files\PostgreSQL\9.6\lib"
 PrivateResource=
 ResourceIncludes=
 MakeIncludes=
 Compiler=
 CppCompiler=
-Linker=libpq.dll_@@_
+Linker=libs\libpq.dll_@@_
 IsCpp=1
 Icon=
-ExeOutput=..\..\..\..\xampp\cgi-bin
+ExeOutput=..\..\..\..\..\xampp\cgi-bin\apaaa
 ObjectOutput=
 LogOutput=
 LogOutputEnabled=0
@@ -24,7 +24,7 @@ HostApplication=
 UseCustomMakefile=0
 CustomMakefile=
 CommandLine=
-Folders=
+Folders=files
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=0
@@ -60,20 +60,20 @@ Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit2]
-FileName=pqConnect.cpp
+[Unit3]
+FileName=files\Arguments.hpp
 CompileCpp=1
-Folder=
+Folder=files
 Compile=1
 Link=1
 Priority=1000
 OverrideBuildCmd=0
 BuildCmd=
 
-[Unit3]
-FileName=pqConnect.hpp
+[Unit2]
+FileName=files\Arguments.cpp
 CompileCpp=1
-Folder=
+Folder=files
 Compile=1
 Link=1
 Priority=1000
@@ -81,9 +81,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=Arguments.hpp
+FileName=files\pqConnect.cpp
 CompileCpp=1
-Folder=
+Folder=files
 Compile=1
 Link=1
 Priority=1000
@@ -91,9 +91,9 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=Arguments.cpp
+FileName=files\pqConnect.hpp
 CompileCpp=1
-Folder=
+Folder=files
 Compile=1
 Link=1
 Priority=1000

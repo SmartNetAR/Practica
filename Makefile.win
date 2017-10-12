@@ -4,12 +4,12 @@
 CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = main.o pqConnect.o Arguments.o
-LINKOBJ  = main.o pqConnect.o Arguments.o
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -L"C:/Program Files/PostgreSQL/9.6/lib" -L"D:/Dropbox/Privado/ISFT151 Sistemas/Práctica Profesional/Code/postgres y cgi" libpq.dll -g3
+OBJ      = main.o files/Arguments.o files/pqConnect.o
+LINKOBJ  = main.o files/Arguments.o files/pqConnect.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -L"C:/Program Files/PostgreSQL/9.6/lib" libs/libpq.dll -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files/PostgreSQL/9.6/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"C:/Program Files/PostgreSQL/9.6/include"
-BIN      = ../../../../xampp/cgi-bin/index.cgi
+BIN      = ../../../../../xampp/cgi-bin/apaaa/index.cgi
 CXXFLAGS = $(CXXINCS) -g3
 CFLAGS   = $(INCS) -g3
 RM       = rm.exe -f
@@ -27,8 +27,8 @@ $(BIN): $(OBJ)
 main.o: main.cpp
 	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
 
-pqConnect.o: pqConnect.cpp
-	$(CPP) -c pqConnect.cpp -o pqConnect.o $(CXXFLAGS)
+files/Arguments.o: files/Arguments.cpp
+	$(CPP) -c files/Arguments.cpp -o files/Arguments.o $(CXXFLAGS)
 
-Arguments.o: Arguments.cpp
-	$(CPP) -c Arguments.cpp -o Arguments.o $(CXXFLAGS)
+files/pqConnect.o: files/pqConnect.cpp
+	$(CPP) -c files/pqConnect.cpp -o files/pqConnect.o $(CXXFLAGS)
