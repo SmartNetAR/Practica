@@ -1,6 +1,7 @@
 //using namespace std ;
 //#include <iostream>
 //#include <stdio.h>
+#include <string>
 #include <stdlib.h>
 #include "files\pqConnect.hpp"
 #include "files\Arguments.hpp"
@@ -17,20 +18,31 @@ int main(int argc, char** argv) {
 	printf("<title>Conectando Postgress con cgi c++</title>\n") ;
 	printf("</head> \n");
 	pqConnect pq( "localhost", "5432", "apaaa","postgres", "1234" ) ;
+	pq.Connect() ;
 	
-	
-	//arguments = "table:animal" ; //getenv("QUERY_STRING") ;
+
 	arguments = getenv("QUERY_STRING") ;
+	//arguments = "table:animals" ; //getenv("QUERY_STRING") ;
+
 	Arguments argumentos( arguments ) ;
 	printf( "Argumentos: %s\n\n\n", argumentos.GetSTR() ) ;
 	printf( "Metodo: %s\n\n", argumentos.GetMethod() ) ;
 	printf( "Valor: %s\n\n", argumentos.GetValue() ) ;
-	//solucionar esta comparacion
-	pq.Show( argumentos.GetValue() ) ;
-	/*if (argumentos.GetMethod() == "table") {
-		pq.Show( argumentos.GetValue() ) ;
-	}*/
 	
+	//solucionado con string, ver otra solución de comparación con char*
+	if ( std::string( argumentos.GetMethod()) == "table") {
+		pq.Show( argumentos.GetValue() ) ;
+	}
+	else if( std::string( argumentos.GetMethod()) == "get") {
+		printf( "Crear un metodo para Get\n\n") ;
+	}
+	else if( std::string( argumentos.GetMethod()) == "post") {
+		printf( "Crear un metodo para Post\n\n") ;
+	}
+	else {
+		printf( "No se conoce el argumento: %s\n\n", argumentos.GetMethod() )  ;
+	}
+
 	pq.Disconnect() ;
 	printf("<body>\n") ;
     printf("</body>\n") ;
